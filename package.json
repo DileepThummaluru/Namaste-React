@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "Learning Namaste React By Akshay Saini",
   "scripts": {
-    "test": "jest",
-    "start": "rm -rf .parcel-cache && parcel",
-    "build": "rm -rf .parcel-cache && parcel build"
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -19,11 +19,16 @@
   "homepage": "https://github.com/DileepThummaluru/Namaste-React#readme",
   "devDependencies": {
     "parcel": "^2.12.0",
-    "process": "^0.11.10"
+    "path-browserify": "^1.0.1",
+    "postcss": "^8.4.38",
+    "process": "^0.11.10",
+    "tailwindcss": "^3.4.3"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.23.1"
   },
   "browserslist": [
     "last 2 versions"
