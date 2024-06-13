@@ -1,4 +1,5 @@
 import UserClass from "./UserClass";
+import UserContext from "../utils/userContext";
 
 const About = () => {
   return (

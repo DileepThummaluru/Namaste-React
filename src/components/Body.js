@@ -1,8 +1,9 @@
 import RestaurantCard from "./RestaurantCard";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/userContext";
 
 const Body = () => {
   const [listOfRes, setListOfRes] = useState([]);
@@ -15,7 +16,7 @@ const Body = () => {
 
   const featchData = async () => {
     const data = await fetch(
-      "https://cors-anywhere.herokuapp.com/https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.971445514841218&lng=77.70035739988089&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.971445514841218&lng=77.70035739988089&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
 
     const json = await data.json();
@@ -35,13 +36,15 @@ const Body = () => {
       <h1>Looks like you're offline!! Please check your internet connection</h1>
     );
 
+  const { loggedInUser, setUserName } = useContext(UserContext);
+
   if (listOfRes.length === 0) {
     return <Shimmer />;
   }
 
   return (
     <div className="body">
-      <div className="flex">
+      <div className="flex ">
         <div className=" m-4 p-4">
           <input
             type="text"
@@ -72,11 +75,19 @@ const Body = () => {
               const topRes = listOfRes.filter(
                 (res) => res.info.avgRating > 4.0
               );
-              setListOfRes(topRes);
+              setFilteredListOfRes(topRes);
             }}
           >
             Top Rated Restaurants
           </button>
+        </div>
+        <div className="m-4 p-4">
+          <label>User : </label>
+          <input
+            className="border-2 border-black rounded-lg p-1"
+            value={loggedInUser}
+            onChange={(e) => setUserName(e.target.value)}
+          />
         </div>
       </div>
       <div className="flex flex-wrap ml-10">
